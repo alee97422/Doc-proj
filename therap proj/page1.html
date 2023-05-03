@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<button style="float: left;" class="button-5" onclick="history.back()">Back</button>
+
+<div>
+
+  <head>
+    <meta charset="UTF-8" />
+    <title>Notation Tool</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="style2.css">
+    <meta name="theme-color" content="#be1313">
+  </head>
+
+  <!--this is the area where the notes will paste to this area will at end goal need to be set 
+to one side or the other with the buttons that "send" the buttons to this text area are pasted here-->
+
+  <body>
+    <textarea id="textarea" rows="10" cols="60" name="text" placeholder="Notes will paste here"></textarea>
+    <br>
+    <!--this is the button thats sole purpose is to copy all notes into the text area element that 
+    will then be available to be pasted into end users prefferred program -->
+    <button id="emotebutt" onclick="copy()">Copy Notes</button>
+
+
+  </body>
+  <div class="emote">
+    <!--these is the div that will contain the buttons that will be clicked then 
+    will be addeed to the text area element to be copied -->
+    <button id="emotebutt" onclick="getValue()">Anger</button>
+    <button id="emotebutt">Depression</button>
+    <button id="emotebutt">Anxiety</button>
+  </div>
+  <div" class="emote">
+
+    <button id="emotebutt">OCD</button>
+
+</div>
+</div>
+<script>
+function getValue() {
+  fetch('values.html')
+    .then(response => response.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const value = doc.getElementById("angerval").textContent;
+      document.getElementById("textarea").value = value;
+    })
+  }
+
+    function copy() {
+        let textarea = document.getElementById("textarea");
+        textarea.select();
+        document.execCommand("copy");
+      }
+</script>
+</html>
